@@ -69,30 +69,6 @@ Movie Metadata (Pandas / CSV)
 
 ---
 
-# 📂 Project Structure
-src/
-├── embeddings/
-│   ├── embedding_initialization.py
-│   ├── load_embeddings.py
-│
-├── indexing/
-│   ├── initialize_indexes.py
-│
-├── data/
-│   ├── load.py
-│
-├── search/
-│   ├── semantic_search.py
-│   ├── user_recommendation.py
-│
-├── services/
-│   ├── app_context.py
-│   ├── init_services.py
-│
-├── utils/
-│   ├── filters.py
----
-
 # 🚀 API Endpoints
 
 ## 🔍 Semantic Search
