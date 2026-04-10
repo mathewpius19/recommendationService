@@ -1,0 +1,87 @@
+# ----------------------------
+# 🐍 Python Virtual Environment
+# ----------------------------
+venv/
+env/
+.venv/
+ENV/
+
+# ----------------------------
+# 🧠 Python Cache / Bytecode
+# ----------------------------
+pycache/
+*.pyc
+*.pyo
+*.pyd
+.pyc.
+
+# ----------------------------
+# 📦 Build / Distribution
+# ----------------------------
+build/
+dist/
+*.egg-info/
+
+# ----------------------------
+# 📊 Data Files (Optional - keep if large/private)
+# ----------------------------
+*.csv
+*.tsv
+*.parquet
+*.npy
+*.npz
+
+# Uncomment below if you DO want to track some data
+# !important_file.csv
+
+# ----------------------------
+# 🔍 Model / Embedding Files
+# ----------------------------
+*.pt
+*.bin
+*.pkl
+*.joblib
+*.onnx
+
+# FAISS index files
+*.index
+
+# ----------------------------
+# 📝 Logs
+# ----------------------------
+.log
+
+# ----------------------------
+# 🌐 Environment Variables
+# ----------------------------
+.env
+.env.
+*.env
+
+# ----------------------------
+# 🧪 Jupyter Notebooks
+# ----------------------------
+.ipynb_checkpoints/
+
+# ----------------------------
+# 🖥️ OS Files
+# ----------------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------------
+# 🧰 IDE / Editor
+# ----------------------------
+.vscode/
+.idea/
+
+# ----------------------------
+# 🔧 Mac / Misc
+# ----------------------------
+*.swp
+*.swo
+
+# ----------------------------
+# 🐳 Optional (if using Docker later)
+# ----------------------------
+docker-compose.override.yml

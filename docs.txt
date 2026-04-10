@@ -1,0 +1,3 @@
+Models
+all-MiniLM-L6-v2 - Currently using this for smaller training volume
+all-mpnet-base-v2
