@@ -230,13 +230,13 @@ def build_user_embedding(user_interaction_vector, preference_vector, alpha=0.7):
     if user_interaction_vector is None or preference_vector is None:
         raise ValueError("Input vectors cannot be None")
     
-    if user_interaction_vector is None or not not np.any(user_interaction_vector):
+    if not np.any(user_interaction_vector):
         combined = preference_vector.copy()
-    elif preference_vector is None or not np.any(preference_vector):
+    elif not np.any(preference_vector):
         combined = user_interaction_vector.copy()
     else:
-      beta = 1 - alpha
-      combined - alpha * user_interaction_vector + beta * preference_vector
+        beta = 1 - alpha
+        combined = alpha * user_interaction_vector + beta * preference_vector
     norm = np.linalg.norm(combined)
 
     # Guard against zero or non-finite norm

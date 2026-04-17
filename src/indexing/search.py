@@ -64,21 +64,32 @@ def search_query(contentTypes, query):
 def search_user_query(user_df,
                        k=10,
                        alpha=0.7):
-    
-    genre_pref = user_df["genrePref"].iloc[0]
+    if user_df is None or len(user_df) == 0:
+        return []
+
+    genre_pref = user_df["genrePref"].iloc[0] if "genrePref" in user_df.columns else ""
     preferences = {
-        "genrePref": [g.strip() for g in genre_pref.split(",")]
+        "genrePref": [g.strip() for g in genre_pref.split(",") if g.strip()]
     }
     movies_df = app_context.movies 
     index = app_context.index
     movie_ids =  app_context.movie_ids
 
+    interaction_df = user_df[user_df["movie_id"].notna()].copy()
+    seen_movie_ids = interaction_df["movie_id"].values if len(interaction_df) > 0 else np.array([])
 
-    if user_df is None or len(user_df) == 0:
-        return []
-    seen_movie_ids = user_df["movie_id"].values
+    if len(seen_movie_ids) == 0:
+        preferred_genres = preferences["genrePref"]
+        if not preferred_genres:
+            return []
+
+        pattern = "|".join(preferred_genres)
+        genre_matches = movies_df["genres"].str.contains(pattern, case=False, na=False)
+        fallback_ids = movies_df.loc[genre_matches, "movie_id"].dropna().astype(int).tolist()
+        return fallback_ids[:k]
+
     item_vectors = get_user_item_vectors(seen_movie_ids)
-    weights = compute_interaction_weights(user_df)
+    weights = compute_interaction_weights(interaction_df) if len(interaction_df) > 0 else []
     print("computer weights", weights)
 
     interaction_vec = build_interaction_vector(item_vectors, weights)
@@ -95,7 +106,7 @@ def search_user_query(user_df,
     
     # --- FAISS search ---
     query = user_vec.astype(np.float32).reshape(1, -1)
-    fetch_k = k + len(seen_movie_ids)
+    fetch_k = max(k + len(seen_movie_ids), k)
 
     distances, indices = index.search(query, fetch_k)
 

@@ -33,16 +33,51 @@ def buildUserPreferences():
     try:
         data = request.get_json()
         print("data from request ", data)
+        if not data:
+            return jsonify({"error": "Missing request body"}), 400
+
+        user_id = data.get("userId")
+        genre_pref = data.get("genrePref") or []
+        interactions = data.get("interactions") or []
+
+        if user_id is None:
+            return jsonify({"error": "userId is required"}), 400
+
+        if isinstance(genre_pref, str):
+            genre_pref = [genre.strip() for genre in genre_pref.split(",") if genre.strip()]
+
         today = datetime.now()
-        user_df = pd.DataFrame([{
-        "userId": data["userId"],
-        "genrePref": ", ".join(data["genrePref"]),
-        "movie_id": i["movieId"],
-        "rating": i["rating"],
-        "clicks": i["clicks"],
-        "watched": i["watched"],
-        "days_since_last_interaction": (today - datetime.fromisoformat(i["lastInteraction"])).days,
-    } for i in data["interactions"]])
+        rows = []
+
+        for interaction in interactions:
+            last_interaction = interaction.get("lastInteraction")
+            if last_interaction:
+                days_since_last_interaction = (today - datetime.fromisoformat(last_interaction)).days
+            else:
+                days_since_last_interaction = 30
+
+            rows.append({
+                "userId": user_id,
+                "genrePref": ", ".join(genre_pref),
+                "movie_id": interaction.get("movieId"),
+                "rating": interaction.get("rating", 0),
+                "clicks": interaction.get("clicks", 0),
+                "watched": interaction.get("watched", False),
+                "days_since_last_interaction": days_since_last_interaction,
+            })
+
+        if not rows:
+            rows.append({
+                "userId": user_id,
+                "genrePref": ", ".join(genre_pref),
+                "movie_id": None,
+                "rating": 0,
+                "clicks": 0,
+                "watched": False,
+                "days_since_last_interaction": 30,
+            })
+
+        user_df = pd.DataFrame(rows)
         
 
         print("userDF ", user_df)
