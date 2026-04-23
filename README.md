@@ -116,9 +116,9 @@ POST /recommend/user
 
 ## Challenges solved
 
-- Handled semantic drift (e.g. horror vs thriller overlap)
+- Reduced semantic drift by adding weights to genres preferred by user rather than solely relying on semantic similarity.
 
-- Balanced recommendation bias across genres
+- Improved recommendation relevance by integrating interaction signals (ratings, clicks, recency) into user embeddingss
 
 - Preserved ranking across microservices (ML → backend → UI)
 
