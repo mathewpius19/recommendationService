@@ -1,6 +1,6 @@
-# 🎬 ML Recommendation Service (Semantic + Personalized)
+#  ML Recommendation Service (Semantic + Personalized)
 
-## 📌 Overview
+##  Overview
 
 This ML service powers a **movie recommendation system** using:
 
@@ -10,11 +10,17 @@ This ML service powers a **movie recommendation system** using:
 
 It is designed as a **scalable microservice** that integrates with a backend (Spring Boot) and can be extended to **multimodal systems (images, jobs, etc.)**.
 
+This project was built to explore how modern recommendation systems
+combine semantic search with user behavior to deliver personalized results.
+
+Instead of relying on traditional collaborative filtering, this system uses
+vector embeddings and hybrid ranking to simulate real-world ML pipelines.
+
 ---
 
-# 🧠 Key Features
+# Key Features
 
-## 🔍 1. Semantic Search
+## 1. Semantic Search
 
 - Converts user query → embedding
 - Retrieves top-K similar movies using FAISS
@@ -23,7 +29,7 @@ It is designed as a **scalable microservice** that integrates with a backend (Sp
 
 ---
 
-## 👤 2. Personalized Recommendations
+## 2. Personalized Recommendations
 
 - Builds user embeddings using:
   - Ratings
@@ -38,7 +44,7 @@ It is designed as a **scalable microservice** that integrates with a backend (Sp
 
 ---
 
-## ⚖️ 3. Hybrid Ranking
+## 3. Hybrid Ranking
 
 - Semantic similarity (embedding-based)
 - Content-type filtering (movies vs documentaries)
@@ -46,7 +52,7 @@ It is designed as a **scalable microservice** that integrates with a backend (Sp
 
 ---
 
-# 🏗️ Architecture
+#  Architecture
 Client (Spring Boot)
 ↓
 Flask ML Service
@@ -59,7 +65,7 @@ Movie Metadata (Pandas / CSV)
 
 ---
 
-# ⚙️ Tech Stack
+#  Tech Stack
 
 - Python 3.10+
 - Flask
@@ -69,9 +75,9 @@ Movie Metadata (Pandas / CSV)
 
 ---
 
-# 🚀 API Endpoints
+#  API Endpoints
 
-## 🔍 Semantic Search
+##  Semantic Search
 
 ### Endpoint:
 POST /recommend/search
@@ -87,7 +93,7 @@ POST /recommend/search
    "movieIds": [123, 456, 789]
 }
 ```
-👤 User Recommendations
+ User Recommendations
 Endpoint:
 POST /recommend/user
 ## Request:
@@ -108,52 +114,13 @@ POST /recommend/user
 }
 ```
 
-🧠 Core Concepts
+## Challenges solved
 
-1. Embeddings
-	•	Text → vector representation (384D)
-	•	Similar meaning → similar vectors
-2. Cosine Similarity
-	•	Used via dot product (normalized vectors)
-score = embedding @ query_vector
+- Handled semantic drift (e.g. horror vs thriller overlap)
 
-3. FAISS Index
-	•	Stores embeddings
-	•	Enables fast nearest neighbor search
-index.search(query, k)
+- Balanced recommendation bias across genres
 
-4. Interaction Vector
+- Preserved ranking across microservices (ML → backend → UI)
 
-Weighted combination of user history:
-User = Σ (movie_embedding × interaction_weight)
-
-5. Preference Vector
-
-Genre-based vector:
-Preference = Σ (genre_weight × genre_centroid)
-
-6. Final User Embedding
-  User Embedding =
-    α × interaction_vector
-  + (1 - α) × preference_vector
-
-
-🧪 Running the Service
-
-1. Setup environment
-  • python3 -m venv venv
-  • source venv/bin/activate
-  • pip install -r requirements.txt
-
-2. Start Flask server
-   python app.py
-   
-4. Server runs on:
-   http://localhost:4400
-
-🧠 Design Principles
-	•	Load model + index once at startup
-	•	Keep ML logic separate from backend
-	•	Preserve ranking across services
-	•	Use hybrid retrieval (semantic + rules)
+- Designed user embedding system combining behavior + preferences
 
