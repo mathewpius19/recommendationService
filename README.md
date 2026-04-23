@@ -124,3 +124,5 @@ POST /recommend/user
 
 - Designed user embedding system combining behavior + preferences
 
+### Please refer to the webserver repo for backend and frontend implementations (https://github.com/mathewpius19/recommendationWebServer)
+
