@@ -40,7 +40,7 @@ vector embeddings and hybrid ranking to simulate real-world ML pipelines.
 
 - Combines:Interaction Vector + Preference Vector → User Embedding
 
--  Retrieves recommendations via vector similarity
+-  Retrieves recommendations via vector similarity. Leveraged FAISS IndexFlatIP for exact similarity search, prioritizing accuracy over speed given moderate dataset size and the need for precise recommendation ranking
 
 ---
 
