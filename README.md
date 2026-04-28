@@ -4,11 +4,8 @@
 
 This ML service powers a **movie recommendation system** using:
 
-- Semantic search (text embeddings)
+- Semantic search (sentence embeddings)
 - Personalized recommendations (user embeddings)
-- Vector similarity search (FAISS)
-
-It is designed as a **scalable microservice** that integrates with a backend (Spring Boot) and can be extended to **multimodal systems (images, jobs, etc.)**.
 
 This project was built to explore how modern recommendation systems
 combine semantic search with user behavior to deliver personalized results.
@@ -48,7 +45,7 @@ vector embeddings and hybrid ranking to simulate real-world ML pipelines.
 
 - Semantic similarity (embedding-based)
 - Content-type filtering (movies vs documentaries)
-- Balanced retrieval (avoids bias in results)
+- Personalized retrieval (weighted signals)
 
 ---
 
@@ -60,18 +57,6 @@ Flask ML Service
 Embeddings Model (Sentence Transformers)
 ↓
 FAISS Index (Vector Search)
-↓
-Movie Metadata (Pandas / CSV)
-
----
-
-#  Tech Stack
-
-- Python 3.10+
-- Flask
-- Sentence Transformers (MiniLM)
-- FAISS (vector search)
-- NumPy / Pandas
 
 ---
 
