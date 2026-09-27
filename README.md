@@ -1,3 +1,12 @@
+# This project has evolved into ReelFinder.
+
+## The recommendation engine in this repository is now part of the full-stack ReelFinder project, which includes the Next.js frontend, Spring Boot backend, PostgreSQL persistence, Ollama agent, FastMCP integration, Sentence Transformer embeddings, FAISS semantic search, and personalized recommendations.
+
+# Current repository: https://github.com/mathewpius19/REEL-FINDER
+
+### This repository is retained to preserve the original development history and existing links.
+
+
 #  ML Recommendation Service (Semantic + Personalized)
 
 ##  Overview
